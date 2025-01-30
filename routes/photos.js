@@ -20,5 +20,16 @@ router.get("/:id", function (request, response) {
     // returns photo via json
 })
 
+// Same as above with photo comments added via photo id
+router.get("/:id/comments", function (request, response) {
+    const photo = photos.find((e) => e.id === request.params.id);
+    if (photo === undefined) {
+        response.status(404).send("Photo not found")
+    }
+    else {
+        response.json(photo.comments)
+    }
+})
+
 export default router;
 // imported to index.js as photoRoutes
